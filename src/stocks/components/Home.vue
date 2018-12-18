@@ -5,7 +5,7 @@
       <h5 class="card-title">Trade or View your funds</h5>
       <hr>
       <p class="card-text">
-        Your funds: ${{funds}}
+        Your funds: {{funds | currency }}
       </p>
     </div>
   </div>

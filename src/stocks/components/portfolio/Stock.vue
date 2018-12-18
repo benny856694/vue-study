@@ -7,7 +7,8 @@
     <div class="card-body">
      <form class="form-inline" style="justify-content: space-between">
      <input type="text" v-model.number="quantity" placeholder="Quantity" class="form-control col-6" >
-      <button href="#" @click.prevent="sellStock({id: stock.id, quantity, price: stock.price})" class="btn btn-success">Sell</button>
+      <button href="#" :disabled="quantity <= 0 || inSufficientQuantity" @click.prevent="sellStockWrapper({id: stock.id, quantity, price: stock.price})" class="btn btn-success">
+      {{ inSufficientQuantity ? "Insufficient Quantity" : 'Sell'}}</button>
      </form>
       
     </div>
@@ -25,10 +26,18 @@ export default {
   },
   props: ["stock"],
   methods: {
-    
+    sellStockWrapper(payload) {
+      this.sellStock(payload);
+      this.quantity = 0;
+    },
     ...mapMutations('portfolio', [
     'sellStock'
     ])
+  },
+  computed: {
+    inSufficientQuantity() {
+      return this.stock.quantity < this.quantity;
+    }
   }
 
 };

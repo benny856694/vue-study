@@ -8,7 +8,13 @@
     
     <form class="form-inline" style="justify-content: space-between">
      <input type="text" v-model.number="quantity" placeholder="Quantity" class="form-control col-6" >
-      <button  @click.prevent="buyStock({id: stock.id, quantity, price: stock.price})" class="btn btn-success">Buy</button>
+      <button  
+      @click.prevent="buyStockWrapper({id: stock.id, quantity, price: stock.price})" 
+      class="btn btn-success"
+      :disabled=" quantity <= 0 || insufficientFunds"
+      >
+      {{ insufficientFunds ? "Insufficient Funds" : 'Buy'}}
+      </button>
     </form>
 
       
@@ -27,9 +33,18 @@ export default {
   },
   props: ["stock"],
   methods: {
+    buyStockWrapper(payload) {
+      this.buyStock(payload);
+      this.quantity = 0;
+    },
     ...mapMutations('portfolio', [
     'buyStock'
     ])
+  },
+  computed: {
+    insufficientFunds() {
+      return this.quantity * this.stock.price > this.$store.state.portfolio.funds;
+    }
   }
 };
 </script>

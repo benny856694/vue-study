@@ -77,7 +77,7 @@
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link">Your funds: {{funds}}</a>
+          <a class="nav-link">Your funds: {{funds | currency}}</a>
         </li>
       </ul>
     </div>
