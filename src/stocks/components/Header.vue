@@ -25,38 +25,15 @@
         <router-link class="nav-item" to="/stocks" tag="li"
           ><a class="nav-link" href="#">Stocks</a></router-link
         >
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            Dropdown
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
+       
       </ul>
       <ul class="navbar-nav">
-        <router-link class="nav-item" tag="li" to="/portfolio">
-          <a class="nav-link" href="#"
-            >Portfolio <span class="sr-only">(current)</span></a
+        <li class="nav-item" tag="li" to="/portfolio">
+          <a class="nav-link" href="#" @click.prevent="randomizeStocks"
+            >End Day <span class="sr-only">(current)</span></a
           >
-        </router-link>
-        <router-link class="nav-item" to="/stocks" tag="li"
-          ><a class="nav-link" href="#">Stocks</a></router-link
-        >
+        </li>
+        
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
@@ -67,13 +44,11 @@
             aria-haspopup="true"
             aria-expanded="false"
           >
-            Dropdown
+            Save & Load
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <a class="dropdown-item" href="#">Save Data</a>
+            <a class="dropdown-item" href="#">Load Data</a>
           </div>
         </li>
         <li class="nav-item">
@@ -86,10 +61,14 @@
 
 <script>
 import {mapState} from 'vuex'
+import {mapMutations} from 'vuex'
 
 export default {
   computed: {
     ...mapState('portfolio', [ 'funds' ])
+  },
+  methods: {
+    ...mapMutations('stocks', ['randomizeStocks'])
   }
 };
 </script>
