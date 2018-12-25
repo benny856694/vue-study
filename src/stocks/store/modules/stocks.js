@@ -7,6 +7,9 @@ export default {
       { id: 3, name: "GOOGLE", price: 130 }
     ]
   },
+  getters: {
+    stocks: (state) => state.all,
+  },
   mutations: {
     randomizeStocks: (state, payload) => 
         state.all.forEach(stock => 

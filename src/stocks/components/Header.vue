@@ -47,8 +47,8 @@
             Save & Load
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Save Data</a>
-            <a class="dropdown-item" href="#">Load Data</a>
+            <a class="dropdown-item" @click="saveData" href="javascript:void(0)">Save Data</a>
+            <a class="dropdown-item" @click="loadData" href="javascript:void(0)">Load Data</a>
           </div>
         </li>
         <li class="nav-item">
@@ -62,13 +62,15 @@
 <script>
 import {mapState} from 'vuex'
 import {mapMutations} from 'vuex'
+import {mapActions} from 'vuex'
 
 export default {
   computed: {
     ...mapState('portfolio', [ 'funds' ])
   },
   methods: {
-    ...mapMutations('stocks', ['randomizeStocks'])
+    ...mapMutations('stocks', ['randomizeStocks']),
+    ...mapActions(['saveData', 'loadData'])
   }
 };
 </script>
