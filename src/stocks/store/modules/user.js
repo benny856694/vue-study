@@ -14,10 +14,17 @@ export default {
 
   mutations: {
     
-    logIn: (state, {idToken, expiresIn}) => {
+    logIn(state, {idToken, expiresIn}) {
       state.idToken = idToken;
       //var expiresInD = new Date(new Date().getTime() + parseInt(expiresIn, 10) * 1000 );
       state.expiresIn = expiresIn;
+      var vm = this;
+      //console.log(this);
+      var timeOut = expiresIn - new Date();
+      console.log(timeOut);
+      setTimeout(()=>{
+        vm.commit("user/logOut");
+      }, timeOut );
      
     },
     
@@ -35,7 +42,7 @@ export default {
       var expiresIn = localStorage.getItem("expiresIn");
       if (expiresIn) expiresIn = new Date(Date.parse(expiresIn));
       if (expiresIn > new Date()) {
-        console.log("logIn");
+        //console.log("logIn");
         context.commit("logIn", { idToken, expiresIn });
       }
     },
@@ -51,7 +58,7 @@ export default {
           localStorage.setItem("idToken", response.data.idToken);
           var expiresInD = new Date(new Date().getTime() + parseInt(response.data.expiresIn, 10) * 1000);
           localStorage.setItem("expiresIn", expiresInD);
-          context.commit("logIn", {idToken: response.data, expiresIn: expiresInD} );
+          context.commit("logIn", {idToken: response.data.idToken, expiresIn: expiresInD} );
         })
         .catch(error => console.log(error));
     },
@@ -67,7 +74,7 @@ export default {
           localStorage.setItem("idToken", response.data.idToken);
           var expiresInD = new Date(new Date().getTime() + parseInt(response.data.expiresIn, 10) * 1000);
           localStorage.setItem("expiresIn", expiresInD); 
-          context.commit("logIn", { idToken: response.data, expiresIn: expiresInD });
+          context.commit("logIn", { idToken: response.data.idToken, expiresIn: expiresInD });
         })
         .catch(error => console.log(error));
     }
