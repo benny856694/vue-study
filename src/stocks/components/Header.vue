@@ -1,8 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light my-3">
-    <router-link to="/"
-      ><a class="navbar-brand" href="#">Stock Trader</a></router-link
-    >
+    <router-link to="/">
+      <a class="navbar-brand" href="#">Stock Trader</a>
+    </router-link>
     <button
       class="navbar-toggler"
       type="button"
@@ -18,14 +18,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <router-link class="nav-item" tag="li" to="/portfolio">
-          <a class="nav-link" href="#"
-            >Portfolio <span class="sr-only">(current)</span></a
-          >
+          <a class="nav-link" href="#">
+            Portfolio <span class="sr-only">(current)</span>
+          </a>
         </router-link>
         <router-link class="nav-item" to="/stocks" tag="li"
           ><a class="nav-link" href="#">Stocks</a></router-link
         >
-       
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item" tag="li" to="/portfolio">
@@ -33,7 +32,7 @@
             >End Day <span class="sr-only">(current)</span></a
           >
         </li>
-        
+
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
@@ -47,12 +46,37 @@
             Save & Load
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" @click="saveData" href="javascript:void(0)">Save Data</a>
-            <a class="dropdown-item" @click="loadData" href="javascript:void(0)">Load Data</a>
+            <a class="dropdown-item" @click="saveData" href="javascript:void(0)"
+              >Save Data</a
+            >
+            <a class="dropdown-item" @click="loadData" href="javascript:void(0)"
+              >Load Data</a
+            >
           </div>
         </li>
+        <router-link
+          class="nav-item"
+          v-if="!isAuthenticated"
+          tag="li"
+          to="/signup"
+        >
+          <a class="nav-link" href="#"> Sign Up </a>
+        </router-link>
+        <router-link
+          class="nav-item"
+          v-if="!isAuthenticated"
+          tag="li"
+          to="/signin"
+        >
+          <a class="nav-link" href="#"> Sign In </a>
+        </router-link>
+        <li class="nav-item" v-if="isAuthenticated">
+          <a class="nav-link" href="javascript:void(0)" @click="logOut"
+            >Logout</a
+          >
+        </li>
         <li class="nav-item">
-          <a class="nav-link">Your funds: {{funds | currency}}</a>
+          <a class="nav-link">Your funds: {{ funds | currency }}</a>
         </li>
       </ul>
     </div>
@@ -60,17 +84,20 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
-import {mapMutations} from 'vuex'
-import {mapActions} from 'vuex'
+import { mapState } from "vuex";
+import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   computed: {
-    ...mapState('portfolio', [ 'funds' ])
+    ...mapState("portfolio", ["funds"]),
+    ...mapGetters("user", ["isAuthenticated"])
   },
   methods: {
-    ...mapMutations('stocks', ['randomizeStocks']),
-    ...mapActions(['saveData', 'loadData'])
+    ...mapMutations("stocks", ["randomizeStocks"]),
+    ...mapActions(["saveData", "loadData"]),
+    ...mapMutations("user", ["logOut"])
   }
 };
 </script>

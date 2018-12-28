@@ -7,10 +7,13 @@
       <form class="form-inline" style="justify-content: space-between">
         <input
           type="text"
+          v-validate="'required|numeric'"
+          name="quantity"
           v-model.number="quantity"
           placeholder="Quantity"
           class="form-control col-6"
         />
+        <span>{{ errors.first("quantity") }}</span>
         <button
           @click.prevent="
             buyStockWrapper({ id: stock.id, quantity, price: stock.price });
