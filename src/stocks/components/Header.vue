@@ -71,7 +71,7 @@
           <a class="nav-link" href="#"> Sign In </a>
         </router-link>
         <li class="nav-item" v-if="isAuthenticated">
-          <a class="nav-link" href="javascript:void(0)" @click="logOut"
+          <a class="nav-link" href="javascript:void(0)" @click="logOutWrapper"
             >Logout</a
           >
         </li>
@@ -97,7 +97,11 @@ export default {
   methods: {
     ...mapMutations("stocks", ["randomizeStocks"]),
     ...mapActions(["saveData", "loadData"]),
-    ...mapMutations("user", ["logOut"])
+    ...mapMutations("user", ["logOut"]),
+    logOutWrapper() {
+      this.logOut();
+      this.$router.push('/signin');
+    }
   }
 };
 </script>

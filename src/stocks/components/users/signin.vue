@@ -1,7 +1,8 @@
 <template>
   <div class="row  justify-content-center">
-    <form class="form col-4">
+    <form class="form col-sm-6 col-lg-4">
       <div class="form-group">
+      <label for="">Email:</label>
         <input
           type="email"
           name="email"
@@ -14,6 +15,7 @@
       </div>
 
       <div class="form-group">
+        <label for="">Password:</label>
         <input
           type="password"
           v-validate="'required|min:6'"
@@ -24,10 +26,10 @@
         />
         <span>{{ errors.first("password") }}</span>
       </div>
-
       <input
         type="submit"
         class="btn btn-primary"
+        :disabled="errors.any()"
         @click.prevent="signInWrapper"
         value="Sign In"
       />
@@ -53,6 +55,7 @@ export default {
         email: this.email,
         password: this.password
       });
+      this.$router.push('/stocks');
     }
   }
 };

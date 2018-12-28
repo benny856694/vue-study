@@ -1,6 +1,6 @@
 <template>
   <div class="row  justify-content-center">
-    <form class="form col-4">
+    <form class="form col-sm-6 col-lg-4">
       <div class="form-group">
         <input
           type="email"
@@ -51,6 +51,7 @@ export default {
         email: this.email,
         password: this.password
       });
+      this.$router.push('/stocks');
     }
   }
 };
