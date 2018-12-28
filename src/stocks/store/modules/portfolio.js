@@ -22,13 +22,18 @@ export default {
     },
     sellStock: (state, payload) => {
       var record = state.stocks.find(item => item.id == payload.id);
-      if(record) {
+      if (record) {
         record.quantity -= payload.quantity;
-        if(record.quantity == 0) state.stocks.splice(state.stocks.indexOf(record), 1);
+        if (record.quantity == 0)
+          state.stocks.splice(state.stocks.indexOf(record), 1);
       }
 
       state.funds += payload.price * payload.quantity;
     },
+    reset: state => {
+      state.funds = 10000;
+      state.stocks = [];
+    }
   },
   getters: {
     stockHolding: (state, getters, rootState, rootGetters) => {

@@ -6,6 +6,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 import AppHeader from "./components/Header";
 import Stocks from "./components/stocks/Stocks";
 import Portfolio from "./components/portfolio/Portfolio";
@@ -17,7 +19,15 @@ export default {
     Stocks,
     Portfolio,
     SignUp
-  }
+  },
+  methods: {
+    ...mapActions("user", ['tryLogIn'])
+  },
+  created() {
+    //console.log("try Log in");
+    this.tryLogIn();
+  },
+ 
 };
 </script>
 

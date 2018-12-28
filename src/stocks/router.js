@@ -15,6 +15,6 @@ export default new VueRouter({
     { path: "/portfolio", component: Portfolio },
     { path: "/stocks", component: Stocks },
     { path: "/signup", component: SignUp },
-    { path: "/signin", component: SignIn },
+    { path: "/signin", component: SignIn }
   ]
 });

@@ -15,7 +15,9 @@ export default new Vuex.Store({
         portfolio: context.state.portfolio,
         stocks: context.state.stocks
       };
-      axio.put("/.json", data, { params: { auth: context.state.user.idToken } });
+      axio.put("/.json", data, {
+        params: { auth: context.state.user.idToken }
+      });
     },
     loadData: (context, payload) => {
       var ctx = context;

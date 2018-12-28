@@ -2,7 +2,7 @@
   <div class="row  justify-content-center">
     <form class="form col-sm-6 col-lg-4">
       <div class="form-group">
-      <label for="">Email:</label>
+        <label for="">Email:</label>
         <input
           type="email"
           name="email"
@@ -55,7 +55,7 @@ export default {
         email: this.email,
         password: this.password
       });
-      this.$router.push('/stocks');
+      this.$router.push("/stocks");
     }
   }
 };

@@ -33,7 +33,7 @@
           >
         </li>
 
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" v-if="isAuthenticated">
           <a
             class="nav-link dropdown-toggle"
             href="#"
@@ -98,9 +98,11 @@ export default {
     ...mapMutations("stocks", ["randomizeStocks"]),
     ...mapActions(["saveData", "loadData"]),
     ...mapMutations("user", ["logOut"]),
+    ...mapMutations("portfolio", ["reset"]),
     logOutWrapper() {
       this.logOut();
-      this.$router.push('/signin');
+      this.reset();
+      this.$router.push("/signin");
     }
   }
 };
