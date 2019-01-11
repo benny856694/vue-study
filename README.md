@@ -1,6 +1,6 @@
-# test-project
+# Vue Playground
 
-> A Vue.js project
+> A Vue.js playground project to experiment vue.js features
 
 ## Build Setup
 
